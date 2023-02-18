@@ -1,12 +1,12 @@
-import webbrowser
-
 import rumps
 
+from RepoMenuItem import MenuItem
 from data import GetData
 
 REFRESH = rumps.MenuItem("Refresh", icon="refresh.png")
 USERNAME = rumps.MenuItem("Change user name", icon="gitIco.png")
 SHOW_ACCOUNT_INFO = rumps.MenuItem("Your account info", icon="gitIco.png")
+YOUR_REPOSITORY = rumps.MenuItem("your repository's")
 MADE_WITH_LOVE = rumps.MenuItem("MADE WITH ❤️ BY MAHDI MAZAHERI")
 
 
@@ -17,11 +17,24 @@ class AwesomeStatusBarApp(rumps.App):
         self.getData = GetData()
         self.title = f"Followers : {self.getData.getFollowers()}"
         self.icon = "gitIco.png"
-        self.menu = [REFRESH, USERNAME, SHOW_ACCOUNT_INFO, MADE_WITH_LOVE]
+        self.initialMenuItem()
 
     @rumps.clicked("Refresh")
     def refresh(self, _):
         self.title = f"Followers : {self.getData.getFollowers()}"
+        self.menu.clear()
+        self.initialMenuItem()
+
+    def initialMenuItem(self):
+        self.menu = [REFRESH, USERNAME, YOUR_REPOSITORY]
+        self.getRepoMeny()
+        self.menu.add(MADE_WITH_LOVE)
+
+    def getRepoMeny(self):
+        repoList = self.getData.getRep()
+        for item in repoList:
+            menuItem = MenuItem(text=item.text, link=item["href"])
+            self.menu.add(menuItem)
 
     @rumps.clicked("Change user name")
     def change(self, _):

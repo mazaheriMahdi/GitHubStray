@@ -1,12 +1,9 @@
 import os.path
 import os.path
-
+from url import  *
 import requests
 import rumps
 from bs4 import BeautifulSoup
-
-URL = "https://github.com/"
-Rep = "?tab=repositories"
 
 
 class GetUserName(rumps.Window):
