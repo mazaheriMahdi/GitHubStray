@@ -60,7 +60,6 @@ class GetData:
             return ["error"]
         soup = BeautifulSoup(response.text, "html.parser")
         soup = soup.findAll("a", attrs={"itemprop": "name codeRepository"})
-
         return soup
 
 
