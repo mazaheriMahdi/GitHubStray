@@ -44,7 +44,7 @@ class AwesomeStatusBarApp(rumps.App):
     def change(self, _):
         self.getData.username = self.getData.getUserName()
         self.getData.saveUserName(self.getData.username)
-        self.refresh()
+        self.refresh
 
     @rumps.timer(interval=60 * 2)
     def reGet(self, sender):
