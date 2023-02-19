@@ -27,7 +27,9 @@ class AwesomeStatusBarApp(rumps.App):
     def initialMenuItem(self):
         self.menu.clear()
         self.menu = [REFRESH, None,USERNAME, None ,YOUR_REPOSITORY ]
+        # al =rumps.alert(title="Loading..." , message="Data is loading please wait.." , ok=None , cancel=None , other=None)
         self.getRepoMeny()
+
         self.menu.add(None)
         self.menu.add(MADE_WITH_LOVE)
         self.menu.add(None)
@@ -45,7 +47,7 @@ class AwesomeStatusBarApp(rumps.App):
         self.getData.saveUserName(self.getData.username)
         self.refresh(self)
 
-    @rumps.timer(interval=60 * 2)
+    @rumps.timer(interval=60 * 9)
     def reGet(self, sender):
         """ Timer """
 
