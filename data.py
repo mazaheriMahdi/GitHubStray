@@ -4,8 +4,8 @@ import os.path
 import requests
 import rumps
 from bs4 import BeautifulSoup
-from urllib3 import HTTPSConnectionPool
 
+import url
 from url import *
 
 
@@ -55,13 +55,24 @@ class GetData:
         try:
             response = requests.get(url=URL + self.username + Rep)
             response.raise_for_status()
-        except :
+        except:
             rumps.alert("Network Error", "Check your network connection", ok=None, icon_path="gitIco.png")
             return ["error"]
         soup = BeautifulSoup(response.text, "html.parser")
         soup = soup.findAll("a", attrs={"itemprop": "name codeRepository"})
         return soup
 
+    def getRepoContent(self, name):
+        try:
+            response = requests.get(url=url.URL + self.username + "/" + name)
+            soup = BeautifulSoup(response.text, "html.parser")
+            soup = soup.findAll("a", class_="js-navigation-open Link--primary")
+            print(response.url)
+            return soup
+        except:
+            rumps.alert("Network Error", "Check your network connection", ok=None, icon_path="gitIco.png")
+            return ["error"]
 
-getData = GetData()
-print(getData.getRep())
+
+# getData = GetData()
+# print(getData.getRepoContent("myFirstApp"))
