@@ -15,7 +15,6 @@ class AwesomeStatusBarApp(rumps.App):
     def __init__(self):
         super(AwesomeStatusBarApp, self).__init__("Awesome App")
         self.getData = GetData()
-        self.title = f"Followers : {self.getData.getFollowers()}"
         self.icon = "gitIco.png"
         self.initialMenuItem()
 
@@ -44,7 +43,7 @@ class AwesomeStatusBarApp(rumps.App):
     def change(self, _):
         self.getData.username = self.getData.getUserName()
         self.getData.saveUserName(self.getData.username)
-        self.refresh
+        self.refresh(self)
 
     @rumps.timer(interval=60 * 2)
     def reGet(self, sender):
