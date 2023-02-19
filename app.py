@@ -26,7 +26,7 @@ class AwesomeStatusBarApp(rumps.App):
 
     def initialMenuItem(self):
         self.menu.clear()
-        self.menu = [REFRESH, None,USERNAME, None ,YOUR_REPOSITORY]
+        self.menu = [REFRESH, None,USERNAME, None ,YOUR_REPOSITORY ]
         self.getRepoMeny()
         self.menu.add(None)
         self.menu.add(MADE_WITH_LOVE)

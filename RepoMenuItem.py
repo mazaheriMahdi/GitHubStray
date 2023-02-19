@@ -10,6 +10,7 @@ class MenuItem(rumps.MenuItem):
         super().__init__(text)
         self.link = link
         self.set_callback(self.goTolink)
-
+        sub = rumps.MenuItem(title="test")
+        self.add(sub)
     def goTolink(self, _):
         webbrowser.open(url=URL_w + self.link)
