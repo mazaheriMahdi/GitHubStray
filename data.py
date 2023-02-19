@@ -6,12 +6,13 @@ import rumps
 from bs4 import BeautifulSoup
 
 import url
+from gitContent import GitContentMeue
 from url import *
 
 
 class GetUserName(rumps.Window):
     def __init__(self):
-        super().__init__("Your GitHub user name ", "Config", "like mahdi83mazaheri ... ")
+        super().__init__("Your GitHub user name ", "Config")
         self.icon = "gitIco.png"
 
 
@@ -63,19 +64,21 @@ class GetData:
         return soup
 
     def getRepoContent(self, name):
+
         try:
             response = requests.get(url=url.URL + self.username + "/" + name)
             soup = BeautifulSoup(response.text, "html.parser")
             soup = soup.findAll("div", role="row", class_="Box-row--focus-gray")
-            return soup
+
         except:
             rumps.alert("Network Error", "Check your network connection", ok=None, icon_path="gitIco.png")
             return ["error"]
-        list = []
-        for i in soup:
-            list.append(GitContentMeue(i.find_next("a", class_="js-navigation-open Link--primary")['title'],
-                                       i.find_next("svg")["aria-label"], "3 mounth ago"))
-
-
-getData = GetData()
-print(getData.getRepoContent("blubank")[0])
+        finally:
+            list = []
+            for i in soup:
+                list.append(GitContentMeue(i.find_next("a", class_="js-navigation-open Link--primary")['title'],
+                                           i.find_next("svg")["aria-label"], ""))
+            return list
+#
+# getData = GetData()
+# print(getData.getRepoContent("puzzle"))
