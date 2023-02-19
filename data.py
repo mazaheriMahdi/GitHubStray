@@ -1,9 +1,12 @@
 import os.path
 import os.path
-from url import  *
+
 import requests
 import rumps
 from bs4 import BeautifulSoup
+from urllib3 import HTTPSConnectionPool
+
+from url import *
 
 
 class GetUserName(rumps.Window):
@@ -49,9 +52,14 @@ class GetData:
         return res.text
 
     def getRep(self):
-        response = requests.get(url=URL + self.username + Rep)
+        try:
+            response = requests.get(url=URL + self.username + Rep)
+            response.raise_for_status()
+        except :
+            rumps.alert("Network Error", "Check your network connection", ok=None, icon_path="gitIco.png")
+            return ["error"]
         soup = BeautifulSoup(response.text, "html.parser")
-        soup = soup.findAll("a" , attrs={"itemprop":"name codeRepository"})
+        soup = soup.findAll("a", attrs={"itemprop": "name codeRepository"})
 
         return soup
 
