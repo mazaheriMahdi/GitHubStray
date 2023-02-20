@@ -1,5 +1,8 @@
 import os.path
 import os.path
+import threading
+import time
+from threading import Thread
 
 import requests
 import rumps
@@ -16,7 +19,7 @@ class GetUserName(rumps.Window):
         self.icon = "gitIco.png"
 
 
-class GetData:
+class GetData():
     def __init__(self):
         # chech if there is data file or not
         if not self.isThereFile():
@@ -79,6 +82,13 @@ class GetData:
                 list.append(GitContentMeue(i.find_next("a", class_="js-navigation-open Link--primary")['title'],
                                            i.find_next("svg")["aria-label"], ""))
             return list
-#
 # getData = GetData()
-# print(getData.getRepoContent("puzzle"))
+# t1 = Thread(target=getData.getRepoContent , args=["name"])
+# t1.start()
+# def monitor(thread):
+#     while thread.is_alive():
+#         time.sleep(0.1)
+#         print("loading.")
+#     print()
+# t2 = Thread(target=monitor , args=[t1])
+# t2.start()

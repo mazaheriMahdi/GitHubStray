@@ -1,5 +1,5 @@
 import rumps
-
+from threading import Thread
 from RepoMenuItem import MenuItem
 from data import GetData
 
@@ -16,7 +16,11 @@ class AwesomeStatusBarApp(rumps.App):
         super(AwesomeStatusBarApp, self).__init__("Awesome App")
         self.getData = GetData()
         self.icon = "gitIco.png"
-        self.initialMenuItem()
+        self.menu = [REFRESH, None, USERNAME, None, YOUR_REPOSITORY]
+        self.quit_button = None
+        t1 = Thread(target=self.initialMenuItem)
+        t1.start()
+
 
     @rumps.clicked("Refresh")
     def refresh(self, _):
@@ -26,13 +30,19 @@ class AwesomeStatusBarApp(rumps.App):
 
     def initialMenuItem(self):
         self.menu.clear()
+
+
         self.menu = [REFRESH, None,USERNAME, None ,YOUR_REPOSITORY ]
         # al =rumps.alert(title="Loading..." , message="Data is loading please wait.." , ok=None , cancel=None , other=None)
         self.getRepoMeny()
+        # t1 = Thread(target=)
+        # t1.start()
 
         self.menu.add(None)
         self.menu.add(MADE_WITH_LOVE)
         self.menu.add(None)
+        self.menu.add(self.quit_button)
+
 
 
     def getRepoMeny(self):
