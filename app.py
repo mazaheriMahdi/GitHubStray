@@ -1,8 +1,6 @@
+import rumps
 import time
 from threading import Thread
-
-import rumps
-
 from RepoMenuItem import MenuItem
 from data import GetData
 
