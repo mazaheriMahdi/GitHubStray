@@ -1,3 +1,4 @@
+import time
 from threading import Thread
 
 import rumps
@@ -20,30 +21,52 @@ class AwesomeStatusBarApp(rumps.App):
         self.icon = "gitIco.png"
         self.menu = [REFRESH, None, USERNAME, None, YOUR_REPOSITORY]
         self.quit_button = None
+
         t1 = Thread(target=self.initialMenuItem)
         t1.start()
 
+        t2 = Thread(target=self.loading_animmation, args=[t1])
+        t2.start()
+
+
+        self.downloadingInformer()
+
+    def create_thread(self, task, *args):
+        return Thread(target=task, args=args)
+
+
     @rumps.clicked("Refresh")
     def refresh(self, _):
-        self.title = f"Followers : {self.getData.getFollowers()}"
-        self.menu.clear()
-        self.initialMenuItem()
+        t1 = Thread(target=self.initialMenuItem)
+        t1.start()
+
+        t2 = Thread(target=self.loading_animmation, args=[t1])
+        t2.start()
+
+    def downloadingInformer(self):
+        rumps.alert("Loading", "Downloading Data from GitHub")
+
+    def loading_animmation(self, threed):
+        loading_string = "Loading..."
+        self.icon = "reload.png"
+        while threed.is_alive():
+
+            temp = ""
+            for i in loading_string:
+                time.sleep(0.5)
+                temp += i
+                self.title = temp
+
+        self.title = None
+        self.icon = "gitIco.png"
 
     def initialMenuItem(self):
-        self.icon = "reload.png"
-        self.title = "Loading.."
         self.menu.clear()
-
         self.menu = [REFRESH, None, USERNAME, None, YOUR_REPOSITORY]
-        # al =rumps.alert(title="Loading..." , message="Data is loading please wait.." , ok=None , cancel=None , other=None)
         self.getRepoMeny()
-        # t1 = Thread(target=)
-        # t1.start()
-
         self.menu.add(None)
         self.menu.add(MADE_WITH_LOVE)
         self.menu.add(None)
-        self.icon = "gitIco.png"
         self.menu.add(rumps.MenuItem("Quit"))
 
     def getRepoMeny(self):
@@ -62,15 +85,9 @@ class AwesomeStatusBarApp(rumps.App):
     def reGet(self, sender):
         """ Timer """
 
-        # sender = self.menu['Air!']  # if action no bind on clicked action
-
         def counter(t):
             self.refresh
             print("hello")
-
-        # if bind on clicked action
-        # set_timer = rumps.Timer(callback=counter, interval=60 * 60)
-        # set_timer.start()
 
         counter(None)
 
