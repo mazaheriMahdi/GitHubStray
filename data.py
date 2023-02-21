@@ -1,8 +1,5 @@
 import os.path
 import os.path
-import threading
-import time
-from threading import Thread
 
 import requests
 import rumps
@@ -79,6 +76,17 @@ class GetData():
         finally:
             list = []
             for i in soup:
-                list.append(GitContentMeue(i.find_next("a", class_="js-navigation-open Link--primary")['title'],
-                                           i.find_next("svg")["aria-label"], ""))
+                a = i.find_next("a", class_="js-navigation-open Link--primary")
+                list.append(GitContentMeue(a['title'],
+                                           i.find_next("svg")["aria-label"], "", a["href"]))
             return list
+# getData = GetData()
+# t1 = Thread(target=getData.getRepoContent , args=["name"])
+# t1.start()
+# def monitor(thread):
+#     while thread.is_alive():
+#         time.sleep(0.1)
+#         print("loading.")
+#     print()
+# t2 = Thread(target=monitor , args=[t1])
+# t2.start()

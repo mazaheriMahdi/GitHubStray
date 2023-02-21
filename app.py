@@ -10,7 +10,7 @@ REFRESH = rumps.MenuItem("Refresh", icon="refresh.png")
 USERNAME = rumps.MenuItem("Change user name", icon="username.png")
 SHOW_ACCOUNT_INFO = rumps.MenuItem("Your account info", icon="gitIco.png")
 YOUR_REPOSITORY = rumps.MenuItem("Your repository's : ")
-MADE_WITH_LOVE = rumps.MenuItem("MADE WITH ❤️ BY MAHDI MAZAHERI")
+MADE_WITH_LOVE = rumps.MenuItem("               MADE WITH ❤️ BY MAHDI MAZAHERI               ")
 
 
 class AwesomeStatusBarApp(rumps.App):
