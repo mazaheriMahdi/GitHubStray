@@ -15,7 +15,6 @@ class MenuItem(rumps.MenuItem):
         self.link = link
         self.set_callback(self.goTolink)
         if not is_sub:
-
             data = GetData()
             for i in data.getRepoContent(name=self.text.strip()):
                 newMenu = MenuItem(link=i.href, text=i.title, is_sub=True)
@@ -25,6 +24,6 @@ class MenuItem(rumps.MenuItem):
                     newMenu.icon = "file.png"
                 self.add(newMenu)
 
-
     def goTolink(self, _):
+        """Open menu Item link in browser."""
         webbrowser.open(url=URL_w + self.link)

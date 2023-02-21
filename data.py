@@ -11,12 +11,14 @@ from url import *
 
 
 class GetUserName(rumps.Window):
+    """A dialog which contain a text input for getting username"""
     def __init__(self):
         super().__init__("Your GitHub user name ", "Config")
         self.icon = "gitIco.png"
 
 
 class GetData():
+    """Get data from Git"""
     def __init__(self):
         # chech if there is data file or not
         if not self.isThereFile():
@@ -25,34 +27,42 @@ class GetData():
         self.username = self.readDate()
 
     def isThereFile(self):
+        """chech if the userName saved or not"""
         return os.path.exists("data.txt")
 
     def readDate(self):
+        """Get username from .txt file."""
         with open("data.txt") as file:
             return file.read()
 
     def saveUserName(self, username):
+        """save username to .txt file"""
         with open("data.txt", "w") as file:
             file.write(username)
 
     def getFollowers(self):
+        """Get followers count from Git"""
         response = requests.get("https://github.com/" + self.username)
         soup = BeautifulSoup(response.text, "html.parser")
         soup = soup.findAll("span", "text-bold color-fg-default")[0]
         return soup.text
 
     def getFollowing(self):
+        """Get following count from Git"""
         response = requests.get("https://github.com/" + self.username)
         soup = BeautifulSoup(response.text, "html.parser")
         soup = soup.findAll("span", "text-bold color-fg-default")[1]
         return soup.text
 
     def getUserName(self):
+        """Get username from user"""
         getUser = GetUserName()
         res = getUser.run()
         return res.text
 
     def getRep(self):
+
+        """Get user repositorys name"""
         try:
             response = requests.get(url=URL + self.username + Rep)
             response.raise_for_status()
@@ -64,6 +74,7 @@ class GetData():
         return soup
 
     def getRepoContent(self, name):
+        """Get repository Contents"""
 
         try:
             response = requests.get(url=url.URL + self.username + "/" + name)
