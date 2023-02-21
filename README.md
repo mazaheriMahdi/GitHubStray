@@ -7,4 +7,4 @@ An application for faster access to your GitHub repositories
 ![screenshot](https://github.com/mazaheriMahdi/GitHubStray/blob/main/screenshot/2.jpg)
 ## Installation
 
-simply download and copy .app file into your Application folder.
+simply download and copy [.app file](https://github.com/mazaheriMahdi/GitHubStray/releases) into your Application folder.
