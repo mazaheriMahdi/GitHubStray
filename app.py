@@ -17,6 +17,7 @@ class AwesomeStatusBarApp(rumps.App):
     def __init__(self):
         super(AwesomeStatusBarApp, self).__init__("Awesome App")
         # -=-=--=-=--=-=--=-=--=-=--=-=--=-=--=-=--=-=--=-=--=-=--=-=-
+        self.template = True
         self.getData = GetData()
         self.icon = "gitIco.png"
         self.menu = [REFRESH, None, USERNAME, None, YOUR_REPOSITORY]
@@ -45,6 +46,7 @@ class AwesomeStatusBarApp(rumps.App):
     def loading_animation(self, threed):
         loading_string = "Loading..."
         self.icon = "reload.png"
+
         while threed.is_alive():
 
             temp = ""
