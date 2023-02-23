@@ -16,7 +16,7 @@ setup(
     app=APP,
     name="GitStray",
     data_files=DATA_FILES,
-    version="1.1 beta",
+    version="1.1 stable",
     author="mahdi mazaheri",
     author_email="mahdi83mazaheri@gmail.com",
     platforms=["OSX"],

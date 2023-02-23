@@ -16,13 +16,16 @@ class MenuItem(rumps.MenuItem):
         self.set_callback(self.goTolink)
         if not is_sub:
             data = GetData()
-            for i in data.getRepoContent(name=self.text.strip()):
-                newMenu = MenuItem(link=i.href, text=i.title, is_sub=True)
-                if i.type == "Directory":
-                    newMenu.icon = "folder.png"
-                else:
-                    newMenu.icon = "file.png"
-                self.add(newMenu)
+            repContent = data.getRepoContent(name=self.text.strip())
+            if repContent != "error":
+                for i in repContent:
+                    newMenu = MenuItem(link=i.href, text=i.title, is_sub=True)
+                    if i.type == "Directory":
+                        newMenu.icon = "folder.png"
+                    else:
+                        newMenu.icon = "file.png"
+                    self.add(newMenu)
+
 
     def goTolink(self, _):
         """Open menu Item link in browser."""

@@ -12,6 +12,7 @@ from url import *
 
 class GetUserName(rumps.Window):
     """A dialog which contain a text input for getting username"""
+
     def __init__(self):
         super().__init__("Your GitHub user name ", "Config")
         self.icon = "gitIco.png"
@@ -19,6 +20,7 @@ class GetUserName(rumps.Window):
 
 class GetData():
     """Get data from Git"""
+
     def __init__(self):
         # chech if there is data file or not
         if not self.isThereFile():
@@ -82,8 +84,7 @@ class GetData():
             soup = soup.findAll("div", role="row", class_="Box-row--focus-gray")
 
         except:
-            rumps.alert("Network Error", "Check your network connection", ok=None, icon_path="gitIco.png")
-            return ["error"]
+            return "error"
         finally:
             list = []
             for i in soup:
